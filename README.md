@@ -81,14 +81,15 @@ The recipe code should follow below structure.
 
 ```
     ├── src
-    │   ├── scripts/
-    │   └── lib/
+    │   └── recipe_classification/
+    ├── scripts/
     ├── Dockerfile
-    └── pyproject.toml
+    ├── pyproject.toml
+    └── uv.lock
 ```
 - `src/scripts/*`: Folder with the actual training script. 
   Commonly, it will just be a single script called `train.py`, but you may introduce multiple scripts. 
-- `src/lib/*` (Optional): Folder for all your python helper functions and/or other dependencies used by your 
+- `src/recipe_classification/*` (Optional): Folder for all your python helper functions and/or other dependencies used by your 
   training script. In theory, all your code could be in `train.py`, but for most projects, the training code will be 
   arranged in multiple files. 
 - `Dockerfile`: This dockerfile defines the environment where your script will be executed in the training service. 
@@ -123,10 +124,10 @@ Launch configurations are defined in `.vscode/launch.json`.
 ### Run the script in the terminal
 If you want to run the script in the terminal, you can use the following command.
 
-    python src/scripts/train.py --dataset mnist
+    python scripts/train.py --dataset mnist
 
     # Or if you are outside the virtual environment of vs-code
-    PYTHONPATH=src/lib uv run src/scripts/train.py --dataset mnist
+    PYTHONPATH=src uv run scripts/train.py --dataset mnist
 
 ### Experiment data
 After running an experiment, you should now have a folder called `.data` in the workspace root containing the
@@ -140,10 +141,10 @@ With a working training script, you are now ready to create a recipe.
 We have created a CLI command to help you out. Run below command in the root folder of this repo.
 
     cd recipe-classification
-    hafnia experiment create_recipe
+    hafnia recipe create <PATH_TO_FOLDER>
 
     # Or if you are outside the virtual environment in vs-code
-    uv run hafnia experiment create_recipe
+    uv run hafnia recipe create <PATH_TO_FOLDER>
 
 This command will automatically gather files and create a  training recipe called `recipe.zip`
 in the root folder of the repo.
