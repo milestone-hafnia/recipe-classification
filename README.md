@@ -81,15 +81,14 @@ The recipe code should follow below structure.
 
 ```
     ├── src
-    │   └── recipe_classification/
-    ├── scripts/
+    │   ├── scripts/
+    │   └── lib/
     ├── Dockerfile
-    ├── pyproject.toml
-    └── uv.lock
+    └── pyproject.toml
 ```
 - `src/scripts/*`: Folder with the actual training script. 
   Commonly, it will just be a single script called `train.py`, but you may introduce multiple scripts. 
-- `src/recipe_classification/*` (Optional): Folder for all your python helper functions and/or other dependencies used by your 
+- `src/lib/*` (Optional): Folder for all your python helper functions and/or other dependencies used by your 
   training script. In theory, all your code could be in `train.py`, but for most projects, the training code will be 
   arranged in multiple files. 
 - `Dockerfile`: This dockerfile defines the environment where your script will be executed in the training service. 
